@@ -59,6 +59,9 @@
     self.locationManager.delegate = self; // Tells the location manager to send updates to this object
     __locationStarted = NO;
     __highAccuracyEnabled = NO;
+    self.locationManager.allowsBackgroundLocationUpdates = YES;
+    self.locationManager.activityType = CLActivityTypeFitness;
+    self.locationManager.pausesLocationUpdatesAutomatically = YES;
     self.locationData = nil;
 }
 
@@ -143,7 +146,7 @@
         // higher accuracy, but it's also just spamming the callback with useless reports which drain the battery.
         self.locationManager.distanceFilter = kCLDistanceFilterNone;
         // Set desired accuracy to Best.
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
     } else {
         __highAccuracyEnabled = NO;
         self.locationManager.distanceFilter = 10;
